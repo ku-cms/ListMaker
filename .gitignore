@@ -10,3 +10,4 @@ GeneratorInterface/Core/test/*SMS/
 *.debug
 failed_XSDB_datasets*
 info_XSDB_*.json
+history*
