@@ -122,8 +122,7 @@ def main():
     """Main processing loop."""
     is_data = "data" in directory
     is_sms = "sms" in directory
-    skip_files = []
-    #skip_files = ["102X"]
+    skip_files = [] # ["102X"]
     all_files = [os.path.join(directory, f) for f in os.listdir(directory) if f.endswith(".txt") and not any (skip in f for skip in skip_files)]
     outpaths = set()  # Keep track of processed directories
 

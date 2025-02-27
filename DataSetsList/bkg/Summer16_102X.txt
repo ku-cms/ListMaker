@@ -6,7 +6,6 @@ QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8
 GluGluHToZZTo4L_M125_13TeV_powheg2_JHUgenV6_pythia8
 ZZTo4L_13TeV_powheg_pythia8
 ZJetsToNuNu_HT-2500ToInf_13TeV-madgraph
-TTJets_TuneCUETP8M2T4_13TeV-amcatnloFXFX-pythia8
 WWTo4Q_13TeV-powheg
 WWZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8
 WZTo3LNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8

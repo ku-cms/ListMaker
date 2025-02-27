@@ -94,6 +94,7 @@ def get_XSDB_Info(dataset_name="", search_field=None, driver=None, repeat=0, max
                     'cross_section': cells[3].get_text(strip=True),
                     'total_uncertainty': cells[4].get_text(strip=True),
                     'other_uncertainty': cells[5].get_text(strip=True),
+                    'accuracy': cells[6].get_text(strip=True),
                     'DAS': cells[8].get_text(strip=True),
                     'MCM': cells[9].get_text(strip=True),
                     'kFactor': cells[14].get_text(strip=True),
@@ -139,38 +140,62 @@ def main(driver, search_field):
     parser = argparse.ArgumentParser(description="List of dataset names to process")
     parser.add_argument("--ifile", dest="dataset_list", default=None, help="Input dataset_list (.txt) containing datasets.")
     parser.add_argument("--idir", dest="dataset_list_folder", default=None, help="Input folder of dataset lists containing datasets.")
-    parser.add_argument("-o", "--ofile", dest="json_output", default='XSDB_info.json', help="Output file (.json) with XSDB info.")
+    parser.add_argument("-o", "--ofile", dest="json_output", default='info_XSDB.json', help="Output file (.json) with XSDB info.")
+    parser.add_argument("-m", dest="manual_json", default='ManualRecords_XSDB.json', help="Input manual json records (for datasets known to be missing in XSDB).")
     args = parser.parse_args()
-    print("Successfully connected to XSDB!")
     if not args.dataset_list and not args.dataset_list_folder:
         print("Need to supply either input dataset list or folder of dataset lists!")
         return
 
     dataset_names = []
+    # Option to skip any input files in directory
+    skip_files = [] # ["102X"]
+
+    # Read in dataset names from list
     if args.dataset_list:
         with open(args.dataset_list, "r") as f:
             dataset_names = f.readlines()
+
+    # Read in dataset names from lists inside a folder
     elif args.dataset_list_folder:
-        for file in os.listdir(args.dataset_list_folder):
-            with open(os.path.join(args.dataset_list_folder,file), "r") as f:
+        all_files = [os.path.join(args.dataset_list_folder, f) for f in os.listdir(args.dataset_list_folder)
+                    if f.endswith(".txt") and not any (skip in f for skip in skip_files)]
+        for file in all_files:
+            with open(file, "r") as f:
                 dataset_names += f.readlines()
+
+    # Load in data from manually created json (for datasets known to be missing from XSDB)
+    dataset_info = []
+    if os.path.exists(args.manual_json):
+        with open(args.manual_json, 'r') as manual_file:
+            dataset_info = json.load(manual_file)
+        # Extract dataset names from manual json
+        manual_dataset_names = {entry["process_name"] for entry in dataset_info}
+        # Remove datasets that were in manual json from list to be used with XSDB
+        dataset_names = [dataset for dataset in dataset_names if dataset.replace('\n', '').replace('\r', '').strip() not in manual_dataset_names]
+
+    # Sort list of dataset names and preserve order
     if len(dataset_names) > 1:
         dataset_names = list(dict.fromkeys(dataset_names))
     else:
         print("No dataset names in supplied input!") 
         return
-    dataset_info = []
+
+    # Loop over dataset names with tqdm for progress bar
     for dataset_name in tqdm(dataset_names, desc="Getting XSDB info for datasets", unit="dataset"):
-        dataset_info.append(get_XSDB_Info(dataset_name, search_field, driver))
+        dataset_info.extend(get_XSDB_Info(dataset_name, search_field, driver))
+
+    # Write output to json file
     with open(args.json_output.replace('.json','')+"_"+current_time+'.json', 'w') as json_file:
         json.dump(dataset_info, json_file, indent=4)
-
-    # Close the browser
-    driver.quit()
 
     print("Finished getting info from XSDB!")
 
 if __name__ == "__main__":
     driver, search_field = user_setup()
     if driver:
+        print("Successfully connected to XSDB!")
         main(driver, search_field)
+        # Close the browser
+        driver.quit()
+

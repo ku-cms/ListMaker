@@ -36,7 +36,6 @@ TTTT_TuneCP5_13TeV-amcatnlo-pythia8
 WZZ_TuneCP5_13TeV-amcatnlo-pythia8
 ZZTo2Q2Nu_TuneCP5_13TeV-amcatnloFXFX-pythia8
 QCD_HT500to700_TuneCP5_13TeV-madgraphMLM-pythia8
-WZTo3LNu_TuneCP5_13TeV-amcatnloFXFX-pythia8
 ST_tW_top_5f_NoFullyHadronicDecays_TuneCP5_13TeV-powheg-pythia8
 WZ_TuneCP5_13TeV-pythia8
 TTJets_HT-600to800_TuneCP5_13TeV-madgraphMLM-pythia8
@@ -51,7 +50,6 @@ ST_tWll_5f_LO_TuneCP5_PSweights_13TeV-madgraph-pythia8
 TTJets_TuneCP5_13TeV-madgraphMLM-pythia8
 GluGluHToZZTo4L_M125_TuneCP5_13TeV_powheg2_minloHJJ_JHUGenV7011_pythia8
 ZZTo4L_TuneCP5_13TeV_powheg_pythia8
-WZTo3LNu_TuneCP5_13TeV-powheg-pythia8
 WJetsToLNu_HT-200To400_TuneCP5_13TeV-madgraphMLM-pythia8
 WJetsToLNu_HT-2500ToInf_TuneCP5_13TeV-madgraphMLM-pythia8
 WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8
@@ -74,8 +72,8 @@ VHToGG_M125_13TeV_amcatnloFXFX_madspin_pythia8
 WWTo1L1Nu2Q_4f_TuneCP5_13TeV-amcatnloFXFX-pythia8
 GJets_DR-0p4_HT-600ToInf_TuneCP5_13TeV-madgraphMLM-pythia8
 WJetsToLNu_HT-100To200_TuneCP5_13TeV-madgraphMLM-pythia8
-ZJetsToNuNu_HT-100To200_13TeV-madgraph
-ZJetsToNuNu_HT-200To400_13TeV-madgraph
+ZJetsToNuNu_HT-100To200_TuneCP5_13TeV-madgraphMLM-pythia8
+ZJetsToNuNu_HT-200To400_TuneCP5_13TeV-madgraphMLM-pythia8
 ZJetsToNuNu_HT-400To600_TuneCP5_13TeV-madgraphMLM-pythia8
 ZJetsToNuNu_HT-600To800_TuneCP5_13TeV-madgraphMLM-pythia8
 ZJetsToNuNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8
@@ -119,6 +117,5 @@ ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8
 ttWJets_TuneCP5_13TeV_madgraphMLM_pythia8
 WW_TuneCP5_13TeV-pythia8
 WGG_5f_TuneCP5_13TeV_amcatnlo-pythia8
-ZJetsToNuNu_HT-100To200_TuneCP5_13TeV-madgraphMLM-pythia8
-ZJetsToNuNu_HT-200To400_TuneCP5_13TeV-madgraphMLM-pythia8
 ZZ_TuneCP5_13TeV-pythia8
+WZTo3LNu_TuneCP5_13TeV-amcatnloFXFX-pythia8

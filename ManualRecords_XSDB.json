@@ -1,0 +1,13 @@
+[
+    {
+        "process_name": "DYJetsToLL_M-4to50_HT-400to600_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8",
+        "cross_section": "5.697",
+        "total_uncertainty": "0.01672",
+        "other_uncertainty": "",
+        "accuracy": "LO",
+        "DAS": "/DYJetsToLL_M-4to50_HT-400to600_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM",
+        "MCM": "HIG-RunIIAutumn18MiniAOD-01081",
+        "kFactor": "",
+        "energy": "13"
+    }
+]

@@ -9,4 +9,4 @@ GeneratorInterface/Core/test/condor*_SMS/
 GeneratorInterface/Core/test/*SMS/
 *.debug
 failed_XSDB_datasets*
-XSDB_info_*.json
+info_XSDB_*.json
