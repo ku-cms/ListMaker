@@ -43,7 +43,7 @@ def CERN_login(driver):
     
     # Wait for the 2FA input page to load
     try:
-        two_fa_input = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.ID, "kc-otp-login-form")))
+        two_fa_input = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "kc-otp-login-form")))
     except TimeoutException:
         print("Login failed!")
         return None

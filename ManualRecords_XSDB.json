@@ -9,5 +9,181 @@
         "MCM": "HIG-RunIIAutumn18MiniAOD-01081",
         "kFactor": "",
         "energy": "13"
+    },
+    {
+        "process_name": "TTto4Q_TuneCP5_13p6TeV_powheg-pythia8",
+        "cross_section": "348.2797",
+        "total_uncertainty": "0.1345",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/TTto4Q_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22MiniAODv3-124X_mcRun3_2022_realistic_v12-v4/MINIAODSIM",
+        "MCM": "GEN-Run3Summer22MiniAODv3-00005",
+        "kFactor": "",
+        "energy": "13.6"
+    },
+    {
+        "process_name": "TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8",
+        "cross_section": "80.0205",
+        "total_uncertainty": "0.1345",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/TTto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EEMiniAODv3-124X_mcRun3_2022_realistic_postEE_v1-v2/MINIAODSIM",
+        "MCM": "GEN-Run3Summer22EEMiniAODv3-00003",
+        "kFactor": "",
+        "energy": "13.6"
+    },
+    {
+        "process_name": "TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8",
+        "cross_section": "333.8",
+        "total_uncertainty": "0.1345",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EEMiniAODv3-124X_mcRun3_2022_realistic_postEE_v1-v2/MINIAODSIM",
+        "MCM": "GEN-Run3Summer22EEMiniAODv3-00001",
+        "kFactor": "",
+        "energy": "13.6"
+    },
+    {
+        "process_name": "TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8",
+        "cross_section": "333.8",
+        "total_uncertainty": "0.1345",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/TTtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EEMiniAODv3-124X_mcRun3_2022_realistic_postEE_v1-v2/MINIAODSIM",
+        "MCM": "GEN-Run3Summer22EEMiniAODv3-00001",
+        "kFactor": "",
+        "energy": "13.6"
+    },
+    {
+        "process_name": "GluGluHToWWTo2L2Nu_M125_13TeV_powheg2_JHUGenV714_pythia8",
+        "cross_section": "1.121552032",
+        "total_uncertainty": "0.02027",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/GluGluHToWWTo2L2Nu_M125_13TeV_powheg2_JHUGenV714_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM",
+        "MCM": "HIG-RunIIFall17MiniAODv2-02464",
+        "kFactor": "",
+        "energy": "13"
+    },
+    {
+        "process_name": "GluGluHToWWTo2L2Nu_M125_13TeV_powheg2_JHUGenV714_pythia8_CP5Down",
+        "cross_section": "1.121552032",
+        "total_uncertainty": "0.02027",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/GluGluHToWWTo2L2Nu_M125_13TeV_powheg2_JHUGenV714_pythia8_CP5Down/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM",
+        "MCM": "HIG-RunIIFall17MiniAODv2-03289",
+        "kFactor": "",
+        "energy": "13"
+    },
+    {
+        "process_name": "GluGluHToWWTo2L2Nu_M125_13TeV_powheg2_JHUGenV714_pythia8_CP5Up",
+        "cross_section": "1.121552032",
+        "total_uncertainty": "0.02027",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/GluGluHToWWTo2L2Nu_M125_13TeV_powheg2_JHUGenV714_pythia8_CP5Up/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM",
+        "MCM": "HIG-RunIIFall17MiniAODv2-03288",
+        "kFactor": "",
+        "energy": "13"
+    },
+    {
+        "process_name": "GluGluHToWWTo2L2Nu_M125_13TeV_powheg2_JHUGenV714_pythia8-CP5Down",
+        "cross_section": "1.121552032",
+        "total_uncertainty": "0.02027",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/GluGluHToWWTo2L2Nu_M125_13TeV_powheg2_JHUGenV714_pythia8-CP5Down/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM",
+        "MCM": "HIG-RunIIAutumn18MiniAOD-00777",
+        "kFactor": "",
+        "energy": "13"
+    },
+    {
+        "process_name": "GluGluHToWWTo2L2Nu_M125_13TeV_powheg2_JHUGenV714_pythia8-CP5Up",
+        "cross_section": "1.121552032",
+        "total_uncertainty": "0.02027",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/GluGluHToWWTo2L2Nu_M125_13TeV_powheg2_JHUGenV714_pythia8-CP5Up/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM",
+        "MCM": "HIG-RunIIAutumn18MiniAOD-00778",
+        "kFactor": "",
+        "energy": "13"
+    },
+    {
+        "process_name": "GluGluHToWWToLNuQQ_M125_NNPDF31_TuneCP5_PSweights_13TeV_powheg_JHUGen710_pythia8",
+        "cross_section": "2.310630271",
+        "total_uncertainty": "0.02027",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/GluGluHToWWToLNuQQ_M125_NNPDF31_TuneCP5_PSweights_13TeV_powheg_JHUGen710_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v2/MINIAODSIM",
+        "MCM": "HIG-RunIIFall17MiniAODv2-02128",
+        "kFactor": "",
+        "energy": "13"
+    },
+    {
+        "process_name": "GluGluHToZZTo2L2Nu_M125_TuneCP5_13TeV_powheg2_JHUGenV735_pythia8",
+        "cross_section": "0.98323864",
+        "total_uncertainty": "0.02027",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/GluGluHToZZTo2L2Nu_M125_TuneCP5_13TeV_powheg2_JHUGenV735_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM",
+        "MCM": "HIG-RunIIFall17MiniAODv2-06115",
+        "kFactor": "",
+        "energy": "13"
+    },
+    {
+        "process_name": "GluGluHToZZTo2L2Nu_M125_TuneCP5_13TeV_powheg2_JHUGenV735_pythia8",
+        "cross_section": "0.98323864",
+        "total_uncertainty": "0.02027",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/GluGluHToZZTo2L2Nu_M125_TuneCP5_13TeV_powheg2_JHUGenV735_pythia8/RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v2/MINIAODSIM",
+        "MCM": "HIG-RunIISummer20UL17MiniAODv2-00163",
+        "kFactor": "",
+        "energy": "13"
+    },
+    {
+        "process_name": "GluGluHToZZTo4L_M125_TuneCP5_13TeV_powheg2_minloHJJ_JHUGenV7011_pythia8",
+        "cross_section": "0.01311220454",
+        "total_uncertainty": "0.303",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/GluGluHToZZTo4L_M125_TuneCP5_13TeV_powheg2_minloHJJ_JHUGenV7011_pythia8/RunIISummer20UL17MiniAOD-106X_mc2017_realistic_v6-v2/MINIAODSIM",
+        "MCM": "HIG-RunIISummer20UL17MiniAOD-00926",
+        "kFactor": "",
+        "energy": "13"
+    },
+    {
+        "process_name": "GluGluHToZZTo4L_M125_TuneCP5_13TeV_powheg2_minloHJJ_JHUGenV7011_pythia8",
+        "cross_section": "0.01311220454",
+        "total_uncertainty": "0.303",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/GluGluHToZZTo4L_M125_TuneCP5_13TeV_powheg2_minloHJJ_JHUGenV7011_pythia8/RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v2/MINIAODSIM",
+        "MCM": "HIG-RunIISummer20UL17MiniAODv2-01002",
+        "kFactor": "",
+        "energy": "13"
+    },
+    {
+        "process_name": "GluGluHToWWTo2L2Nu_M-125_CPS_NNPDF31_TuneCP5_13TeV-powheg-jhugen735-pythia8",
+        "cross_section": "1.121552032",
+        "total_uncertainty": "0.01014",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/GluGluHToWWTo2L2Nu_M-125_CPS_NNPDF31_TuneCP5_13TeV-powheg-jhugen735-pythia8/RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v2/MINIAODSIM",
+        "MCM": "HIG-RunIISummer20UL17MiniAODv2-12279",
+        "kFactor": "",
+        "energy": "13"
+    },
+    {
+        "process_name": "GluGluHToWWToLNuQQ_M-125_TuneCP5_13TeV_powheg_jhugen751_pythia8",
+        "cross_section": "2.310630271",
+        "total_uncertainty": "0.007494",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/GluGluHToWWToLNuQQ_M-125_TuneCP5_13TeV_powheg_jhugen751_pythia8/RunIISummer20UL17MiniAODv2-106X_mc2017_realistic_v9-v5/MINIAODSIM",
+        "MCM": "HIG-RunIISummer20UL17MiniAODv2-04217",
+        "kFactor": "",
+        "energy": "13"
     }
 ]

@@ -85,12 +85,14 @@ def process_file(filepath, is_mini, is_data, is_sms, output_dir, outpaths):
     yeartag, cmssw_version = get_tags(os.path.basename(filepath))
     aod_versions = get_nanoaod_versions(cmssw_version, is_mini)
 
-    if not yeartag or not cmssw_version:
+    if not is_data and (not yeartag or not cmssw_version):
         return
     AODType = "NANO"
     if is_mini: AODType = "MINI"
     outpath = f"{output_dir}/{AODType}/{yeartag}{cmssw_version}"
-    if is_sms:
+    if is_data:
+        outpath += "_Data"
+    elif is_sms:
         outpath += "_SMS"
     outpath += "/"
 
@@ -98,9 +100,10 @@ def process_file(filepath, is_mini, is_data, is_sms, output_dir, outpaths):
     outpaths.add(outpath)  # Track processed directories
 
     if is_data:
-        print("Processing data directory")
-        txt_filename = f"{outpath}_Data/{yeartag}{cmssw_version}_Data.txt"
-        make_filelists(txt_filename, datasets)
+        for dataset in datasets:
+            dataset_name = "_".join(dataset.split("/")[1:-1])
+            txt_filename = f"{outpath}/{dataset_name}_{yeartag}{cmssw_version}_Data.txt"
+            make_filelists(txt_filename, [dataset])
     else:
         for dataset in datasets:
             for version in aod_versions:
@@ -120,9 +123,10 @@ def process_file(filepath, is_mini, is_data, is_sms, output_dir, outpaths):
 
 def main():
     """Main processing loop."""
+    # Note: AN for EXO-25-001 has good starting list for EGamma & Muon datasets if needed
     is_data = "data" in directory
     is_sms = "sms" in directory
-    skip_files = [] # ["102X"]
+    skip_files = ["102X"]
     all_files = [os.path.join(directory, f) for f in os.listdir(directory) if f.endswith(".txt") and not any (skip in f for skip in skip_files)]
     outpaths = set()  # Keep track of processed directories
 

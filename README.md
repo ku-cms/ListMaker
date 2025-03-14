@@ -1,10 +1,8 @@
 This repo needs to be inside of a CMSSW directory and most scripts require a grid cert to run
 
-To make lists of files for datasets run:
+To make lists of files for bkg datasets run:
 
 nohup bash -c "time python3 batchList.py -i DataSetsList/bkg/" > batchList_bkg.debug 2>&1 &
-
-python3 batchList.py -i DataSetsList/bkg/ && python3 batchList.py -i DataSetsList/sms/ && python3 batchList.py -i DataSetsList/data/ 
 
 To Make Filter Eff Files:
 
