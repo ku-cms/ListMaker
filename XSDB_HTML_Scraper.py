@@ -30,6 +30,11 @@ def get_chrome_options():
 
 def CERN_login(driver):
     # Locate the username, password fields and the login button
+    try:
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'login')))
+    except TimeoutException:
+        print("Login page failed to load!")
+        return None
     username_field = driver.find_element(By.NAME, 'username')  # Adjust the name attribute
     password_field = driver.find_element(By.NAME, 'password')  # Adjust the name attribute
     login_button = driver.find_element(By.NAME, 'login')  # Adjust the button element
