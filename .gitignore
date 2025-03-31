@@ -11,3 +11,5 @@ GeneratorInterface/Core/test/*SMS/
 failed_XSDB_datasets*
 info_XSDB_*.json
 history*
+__pycache__
+XSectionJSONs

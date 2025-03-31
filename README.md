@@ -21,8 +21,8 @@ python3 convert_filter_file.py
 
 For using XSDB Scraper: 
 
-Need selenium to be installed after running cmsenv:
-python3 -m pip install --user selenium
+Need added python packages to be installed after running cmsenv:
+python3 -m pip install --user selenium deepdiff
 
 Need chrome-driver program for linux (example):
 chromedriver-linux64/chromedriver

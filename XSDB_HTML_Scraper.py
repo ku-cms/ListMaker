@@ -13,6 +13,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from json_updater import JSONUpdater
 
 current_time = datetime.now().strftime("%Y-%m-%d_%H-%M")
 
@@ -105,7 +106,7 @@ def get_XSDB_Info(dataset_name="", search_field=None, driver=None, repeat=0, max
                     'kFactor': cells[14].get_text(strip=True),
                     'energy': cells[17].get_text(strip=True)
                 })
-    elif repeat < max_repeat:
+    elif repeat < max_repeat and dataset_info and dataset_info[0]['process_name'] != dataset_name:
         # Repeat in case website was too slow to load
         repeat += 1
         get_XSDB_Info(dataset_name, search_field, driver, repeat)
@@ -139,6 +140,15 @@ def user_setup():
     search_field = driver.find_element(By.ID, "searchField")
 
     return driver, search_field
+
+def updateJSON(jsonfile, output, failed_list):
+    updater = JSONUpdater(jsonfile)
+    os.system('xrdcp -r root://cmseos.fnal.gov//store/user/z374f439/XSectionJSONs/ ./')
+    update_files = updater.get_json_files_from_directory('XSectionJSONs/')
+    updater.update_with(update_files)
+    updater.save(output)
+    os.system(f'mv {output} {failed_list} XSectionJSONs/')
+    os.system(f'rm {jsonfile}')
 
 def main(driver, search_field):
     # Loop over datasets and pull XSDB info
@@ -190,9 +200,14 @@ def main(driver, search_field):
     for dataset_name in tqdm(dataset_names, desc="Getting XSDB info for datasets", unit="dataset"):
         dataset_info.extend(get_XSDB_Info(dataset_name, search_field, driver))
 
-    # Write output to json file
-    with open(args.json_output.replace('.json','')+"_"+current_time+'.json', 'w') as json_file:
+    # file name:
+    filename = args.json_output.replace('.json','')+"_"+current_time+'.json'
+    # Write output to temp file
+    with open(temp_filename, 'w') as json_file:
         json.dump(dataset_info, json_file, indent=4)
+
+    # Read in previous jsons for final catch (also writes output)
+    updateJSON(f'temp_{filename}',filename,f'failed_XSDB_datasets_{current_time}.txt')
 
     print("Finished getting info from XSDB!")
 
