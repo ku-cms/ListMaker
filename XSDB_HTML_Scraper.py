@@ -141,14 +141,18 @@ def user_setup():
 
     return driver, search_field
 
-def updateJSON(jsonfile, output, failed_list):
+def updateJSON(jsonfile, output, failed_list,update_eos):
     updater = JSONUpdater(jsonfile)
-    os.system('xrdcp -r root://cmseos.fnal.gov//store/user/z374f439/XSectionJSONs/ ./')
+    os.system('xrdcp -sfr root://cmseos.fnal.gov//store/user/z374f439/XSectionJSONs/ ./')
     update_files = updater.get_json_files_from_directory('XSectionJSONs/')
     updater.update_with(update_files)
     updater.save(output)
     os.system(f'mv {output} {failed_list} XSectionJSONs/')
     os.system(f'rm {jsonfile}')
+    if update_eos:
+        os.system('xrdcp -sf XSectionJSONs/* root://cmseos.fnal.gov//store/user/z374f439/XSectionJSONs/')
+        os.system('rm -r XSectionJSONs/')
+        print('Updated XSectionJSONs in EOS!')
 
 def main(driver, search_field):
     # Loop over datasets and pull XSDB info
@@ -203,13 +207,12 @@ def main(driver, search_field):
     # file name:
     filename = args.json_output.replace('.json','')+"_"+current_time+'.json'
     # Write output to temp file
-    with open(temp_filename, 'w') as json_file:
-        json.dump(dataset_info, json_file, indent=4)
+    with open(f'temp_{filename}', 'w') as json_file:
+        json.dump(dataset_info, json_file, indent=4, sort_keys=True)
+    print("Finished getting info from XSDB!")
 
     # Read in previous jsons for final catch (also writes output)
-    updateJSON(f'temp_{filename}',filename,f'failed_XSDB_datasets_{current_time}.txt')
-
-    print("Finished getting info from XSDB!")
+    updateJSON(f'temp_{filename}',filename,f'failed_XSDB_datasets_{current_time}.txt',True)
 
 if __name__ == "__main__":
     driver, search_field = user_setup()

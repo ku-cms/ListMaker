@@ -30,7 +30,7 @@ class JSONUpdater:
     def save(self, output_file=None):
         output_path = output_file if output_file else self.base_file
         with open(output_path, "w", encoding="utf-8") as file:
-            json.dump(self.data, file, indent=4)
+            json.dump(self.data, file, indent=4, sort_keys=True)
         print(f"Updated JSON saved to {output_path}")
 
     @staticmethod
