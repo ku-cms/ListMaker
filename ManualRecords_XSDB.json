@@ -185,5 +185,137 @@
         "MCM": "HIG-RunIISummer20UL17MiniAODv2-04217",
         "kFactor": "",
         "energy": "13"
+    },
+    {
+        "process_name": "TbarWplustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8",
+        "cross_section": "10.85",
+        "total_uncertainty": "0.01296",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/TbarWplustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EEMiniAODv3-124X_mcRun3_2022_realistic_postEE_v1-v2/MINIAODSIM",
+        "MCM": "GEN-Run3Summer22EEMiniAODv3-00046",
+        "kFactor": "",
+        "energy": "13.6"
+    },
+    {
+        "process_name": "TbarWplustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8",
+        "cross_section": "10.85",
+        "total_uncertainty": "0.01296",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/TbarWplustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EEMiniAODv3-124X_mcRun3_2022_realistic_postEE_v1-v2/MINIAODSIM",
+        "MCM": "GEN-Run3Summer22EEMiniAODv3-00046",
+        "kFactor": "",
+        "energy": "13.6"
+    },
+    {
+        "process_name": "TWminustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8",
+        "cross_section": "10.85",
+        "total_uncertainty": "0.01292",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/TWminustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EEMiniAODv3-124X_mcRun3_2022_realistic_postEE_v1-v2/MINIAODSIM",
+        "MCM": "GEN-Run3Summer22EEMiniAODv3-00048",
+        "kFactor": "",
+        "energy": "13.6"
+    },
+    {
+        "process_name": "TWminustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8",
+        "cross_section": "10.85",
+        "total_uncertainty": "0.01292",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/TWminustoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EEMiniAODv3-124X_mcRun3_2022_realistic_postEE_v1-v2/MINIAODSIM",
+        "MCM": "GEN-Run3Summer22EEMiniAODv3-00048",
+        "kFactor": "",
+        "energy": "13.6"
+    },
+    {
+        "process_name": "TbarWplusto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8",
+        "cross_section": "4.6511",
+        "total_uncertainty": "0.01296",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/TbarWplusto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EEMiniAODv3-124X_mcRun3_2022_realistic_postEE_v1-v2/MINIAODSIM",
+        "MCM": "GEN-Run3Summer22EEMiniAODv3-00050",
+        "kFactor": "",
+        "energy": "13.6"
+    },
+    {
+        "process_name": "TbarWplusto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8",
+        "cross_section": "4.6511",
+        "total_uncertainty": "0.01296",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/TbarWplusto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EEMiniAODv3-124X_mcRun3_2022_realistic_postEE_v1-v2/MINIAODSIM",
+        "MCM": "GEN-Run3Summer22EEMiniAODv3-00050",
+        "kFactor": "",
+        "energy": "13.6"
+    },
+    {
+        "process_name": "TWminusto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8",
+        "cross_section": "4.6511",
+        "total_uncertainty": "0.01292",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/TWminusto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EEMiniAODv3-124X_mcRun3_2022_realistic_postEE_v1-v2/MINIAODSIM",
+        "MCM": "GEN-Run3Summer22EEMiniAODv3-00049",
+        "kFactor": "",
+        "energy": "13.6"
+    },
+    {
+        "process_name": "TWminusto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8",
+        "cross_section": "4.6511",
+        "total_uncertainty": "0.01292",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/TWminusto2L2Nu_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EEMiniAODv3-124X_mcRun3_2022_realistic_postEE_v1-v2/MINIAODSIM",
+        "MCM": "GEN-Run3Summer22EEMiniAODv3-00049",
+        "kFactor": "",
+        "energy": "13.6"
+    },
+    {
+        "process_name": "TbarWplusto4Q_TuneCP5_13p6TeV_powheg-pythia8",
+        "cross_section": "25.333",
+        "total_uncertainty": "0.01296",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/TbarWplusto4Q_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EEMiniAODv3-124X_mcRun3_2022_realistic_postEE_v1-v2/MINIAODSIM",
+        "MCM": "GEN-Run3Summer22EEMiniAODv3-00047",
+        "kFactor": "",
+        "energy": "13.6"
+    },
+    {
+        "process_name": "TbarWplusto4Q_TuneCP5_13p6TeV_powheg-pythia8",
+        "cross_section": "25.333",
+        "total_uncertainty": "0.01296",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/TbarWplusto4Q_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EEMiniAODv3-124X_mcRun3_2022_realistic_postEE_v1-v2/MINIAODSIM",
+        "MCM": "GEN-Run3Summer22EEMiniAODv3-00047",
+        "kFactor": "",
+        "energy": "13.6"
+    },
+    {
+        "process_name": "TWminusto4Q_TuneCP5_13p6TeV_powheg-pythia8",
+        "cross_section": "25.333",
+        "total_uncertainty": "0.01292",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/TWminusto4Q_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EEMiniAODv3-124X_mcRun3_2022_realistic_postEE_v1-v2/MINIAODSIM",
+        "MCM": "GEN-Run3Summer22EEMiniAODv3-00051",
+        "kFactor": "",
+        "energy": "13.6"
+    },
+    {
+        "process_name": "TWminusto4Q_TuneCP5_13p6TeV_powheg-pythia8",
+        "cross_section": "25.333",
+        "total_uncertainty": "0.01292",
+        "other_uncertainty": "",
+        "accuracy": "NLO",
+        "DAS": "/TWminusto4Q_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EEMiniAODv3-124X_mcRun3_2022_realistic_postEE_v1-v2/MINIAODSIM",
+        "MCM": "GEN-Run3Summer22EEMiniAODv3-00051",
+        "kFactor": "",
+        "energy": "13.6"
     }
 ]
