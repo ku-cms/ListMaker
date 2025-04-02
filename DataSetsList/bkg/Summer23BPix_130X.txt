@@ -117,3 +117,8 @@ GluGluHtoZZto4L_M-125_TuneCP5_13p6TeV_powheg-jhugen-pythia8
 WWtoLNu2Q_TuneCP5_13p6TeV_powheg-pythia8
 WZto2L2Q_TuneCP5_13p6TeV_powheg-pythia8
 TZQB-ZtoLL-TtoL-CPV_TuneCP5_13p6TeV_madgraph-pythia8
+DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8
+DYto2L-2Jets_MLL-10to50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8
+DYto2L-2Jets_MLL-4to10_TuneCP5_13p6TeV_amcatnloFXFX-pythia8
+ZZ_TuneCP5_13p6TeV_pythia8
+WW_TuneCP5_13p6TeV_pythia8
