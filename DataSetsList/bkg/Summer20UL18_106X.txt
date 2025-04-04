@@ -53,7 +53,6 @@ WJetsToLNu_HT-2500ToInf_TuneCP5_13TeV-madgraphMLM-pythia8
 WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8
 WJetsToLNu_HT-1200To2500_TuneCP5_13TeV-madgraphMLM-pythia8
 WJetsToLNu_HT-400To600_TuneCP5_13TeV-madgraphMLM-pythia8
-ST_s-channel_4f_leptonDecays_TuneCP5_13TeV-amcatnlo-pythia8
 QCD_HT2000toInf_TuneCP5_13TeV-madgraphMLM-pythia8
 WZTo2Q2L_mllmin4p0_TuneCP5_13TeV-amcatnloFXFX-pythia8
 WZG_TuneCP5_13TeV-amcatnlo-pythia8
