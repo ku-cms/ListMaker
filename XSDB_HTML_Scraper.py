@@ -22,8 +22,13 @@ def get_chrome_options():
     chrome_options = Options()
     chrome_options.add_argument('--headless')
     chrome_options.add_argument("--disable-usb")
+    chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--incognito")
+    chrome_options.add_argument("--mute-audio")
+    chrome_options.add_argument("--no-first-run")
+    chrome_options.add_argument("--disable-default-apps")
     chrome_options.add_argument("--log-level=3")  # Suppress logging of severity level 3 (INFO, WARNING, ERROR)
     # CHANGE binary_location to YOUR_PATH
     chrome_options.binary_location = "/home/zflowers/chrome/opt/google/chrome/google-chrome"
@@ -141,7 +146,7 @@ def user_setup():
 
     return driver, search_field
 
-def updateJSON(jsonfile, output, failed_list,update_eos):
+def updateJSON(jsonfile, output, failed_list, update_eos):
     updater = JSONUpdater(jsonfile)
     os.system('xrdcp -sfr root://cmseos.fnal.gov//store/user/z374f439/XSectionJSONs/ ./')
     update_files = updater.get_json_files_from_directory('XSectionJSONs/')

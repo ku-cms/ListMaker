@@ -110,7 +110,7 @@ def process_file(filepath, is_mini, is_data, is_sms, output_dir, outpaths):
                 dataset_paths = get_dataset_paths(dataset, yeartag, AODType, version)
                 dataset, paths = dataset_paths
 
-                paths = [path for path in paths if "JME" not in path and "PUFor" not in path]
+                paths = [path for path in paths if "JME" not in path and "PUFor" not in path and "PU35ForTRK" not in path and "LowPU" not in path]
                 is_fs_only = all("FS" in path for path in paths)
 
                 if not is_fs_only:

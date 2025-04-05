@@ -28,9 +28,11 @@ Need chrome-driver program for linux (example):
 chromedriver-linux64/chromedriver
 
 Need to install chrome locally:
+cd ~
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 rpm2cpio google-chrome-stable_current_x86_64.rpm | cpio -idmv
 
 Once selenium and chrome are installed (only need to do one time) open XSDB_HTML_Scraper.py and edit paths
 Can search for YOUR_PATH
+Once editied to your paths, run:
 python3 XSDB_HTML_Scraper.py --idir DataSetsList/bkg/
