@@ -317,5 +317,49 @@
         "MCM": "GEN-Run3Summer22EEMiniAODv3-00051",
         "kFactor": "",
         "energy": "13.6"
+    },
+    {
+        "DAS": "/GluGluHToTauTau_M-125_TuneCP5_13p6TeV_powheg-pythia8/Run3Summer22EEMiniAODv3-Poisson60KeepRAW_124X_mcRun3_2022_realistic_postEE_v1-v2/MINIAODSIM",
+        "MCM": "TSG-Run3Summer22EEMiniAODv3-00242",
+        "accuracy": "NLO",
+        "cross_section": "3.2637552",
+        "energy": "13.6",
+        "kFactor": "",
+        "other_uncertainty": "",
+        "process_name": "GluGluHToTauTau_M-125_TuneCP5_13p6TeV_powheg-pythia8",
+        "total_uncertainty": "0.007635"
+    },
+    {
+        "DAS": "/GluGluHto2Wto2L2Nu_M-125_TuneCP5_13p6TeV_powheg-jhugen752-pythia8/Run3Summer22EEMiniAODv4-130X_mcRun3_2022_realistic_postEE_v6-v2/MINIAODSIM",
+        "MCM": "HIG-Run3Summer22EEMiniAODv4-00363",
+        "accuracy": "NLO",
+        "cross_section": "1.201959111",
+        "energy": "13.6",
+        "kFactor": "",
+        "other_uncertainty": "",
+        "process_name": "GluGluHto2Wto2L2Nu_M-125_TuneCP5_13p6TeV_powheg-jhugen752-pythia8",
+        "total_uncertainty": "0.003963"
+    },
+    {
+        "DAS": "/GluGluHto2WtoLNu2Q_M-125_TuneCP5_13p6TeV_powheg-JHUGenV752-pythia8/Run3Summer23BPixMiniAODv4-130X_mcRun3_2023_realistic_postBPix_v6-v2/MINIAODSIM",
+        "MCM": "HIG-Run3Summer23BPixMiniAODv4-01079",
+        "accuracy": "NLO",
+        "cross_section": "2.476285564",
+        "energy": "13.6",
+        "kFactor": "",
+        "other_uncertainty": "",
+        "process_name": "GluGluHto2WtoLNu2Q_M-125_TuneCP5_13p6TeV_powheg-JHUGenV752-pythia8",
+        "total_uncertainty": "0.004542"
+    },
+    {
+        "DAS": "/GluGluHtoZZto4L_M-125_TuneCP5_13p6TeV_powheg-jhugen-pythia8/Run3Summer23BPixMiniAODv4-130X_mcRun3_2023_realistic_postBPix_v6-v2/MINIAODSIM",
+        "MCM": "HIG-Run3Summer23BPixMiniAODv4-00563",
+        "accuracy": "NLO",
+        "cross_section": "0.01405225371",
+        "energy": "13.6",
+        "kFactor": "",
+        "other_uncertainty": "",
+        "process_name": "GluGluHtoZZto4L_M-125_TuneCP5_13p6TeV_powheg-jhugen-pythia8",
+        "total_uncertainty": "0.003964"
     }
 ]
