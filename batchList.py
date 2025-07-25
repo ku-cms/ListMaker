@@ -123,10 +123,11 @@ def process_file(filepath, is_mini, is_data, is_sms, output_dir, outpaths):
 
 def main():
     """Main processing loop."""
-    # Note: AN for EXO-25-001 has good starting list for EGamma & Muon datasets if needed
     is_data = "data" in directory
     is_sms = "sms" in directory
-    skip_files = ["102X"]
+    skip_files = []
+    if not is_sms:
+       skip_files = ["102X"]
     all_files = [os.path.join(directory, f) for f in os.listdir(directory) if f.endswith(".txt") and not any (skip in f for skip in skip_files)]
     outpaths = set()  # Keep track of processed directories
 
@@ -148,4 +149,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+    # Note: AN for EXO-25-001 has good starting list for EGamma & Muon datasets if needed
