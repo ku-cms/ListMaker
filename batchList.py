@@ -53,7 +53,7 @@ def get_files_for_dataset(dataset):
     query = f'dasgoclient -query="file dataset={dataset}"'
     return run_command(query).split('\n')
 
-def get_dataset_paths(dataset, yeartag, query_type, version):
+def get_dataset_paths(dataset, yeartag, query_type, version, last_version):
     """Fetch dataset paths."""
     special_campaigns = ["APV", "EE", "BPix"]
     special_campaign = ""
@@ -64,7 +64,7 @@ def get_dataset_paths(dataset, yeartag, query_type, version):
     if "Summer20UL" in yeartag: query = f'dasgoclient -query="dataset=/{dataset}/*{yeartag}NanoAOD{special_campaign}{version}*/{query_type}*"'
     else:             query = f'dasgoclient -query="dataset=/{dataset}/*{yeartag}{special_campaign}NanoAOD{version}*/{query_type}*"'
     results = dataset, run_command(query).split("\n")
-    if results[1] == ['']: print(dataset,"in",yeartag+special_campaign,"not available from",query)
+    if results[1] == [''] and last_version: print(dataset,"in",yeartag+special_campaign,"not available from",query)
     return results
 
 def make_filelists(txt_filename, paths):
@@ -107,7 +107,7 @@ def process_file(filepath, is_mini, is_data, is_sms, output_dir, outpaths):
     else:
         for dataset in datasets:
             for version in aod_versions:
-                dataset_paths = get_dataset_paths(dataset, yeartag, AODType, version)
+                dataset_paths = get_dataset_paths(dataset, yeartag, AODType, version, version == aod_versions[-1])
                 dataset, paths = dataset_paths
 
                 paths = [path for path in paths if "JME" not in path and "PUFor" not in path and "PU35ForTRK" not in path and "LowPU" not in path]
