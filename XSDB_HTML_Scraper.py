@@ -1,7 +1,4 @@
-import os
-import time
-import argparse
-import json
+import os, time, argparse, json
 from tqdm import tqdm
 from bs4 import BeautifulSoup
 from getpass import getpass
@@ -146,12 +143,37 @@ def user_setup():
 
     return driver, search_field
 
+def update_failed_processes_file(failed_processes_file, info_file):
+    # Read the list of process names
+    with open(failed_processes_file, 'r') as f:
+        processes = [line.strip() for line in f if line.strip()]
+
+    # Load JSON content from info_file
+    with open(info_file, 'r') as f:
+        info_data = json.load(f)
+
+    # Extract all process names in the JSON list
+    to_remove = set()
+    for entry in info_data:
+        # Defensive: Only add if "process_name" key exists
+        if "process_name" in entry:
+            to_remove.add(entry["process_name"])
+
+    # Filter out those process names from the original list
+    filtered_processes = [p for p in processes if p not in to_remove]
+
+    # Overwrite the original file with filtered list
+    with open(failed_processes_file, 'w') as f:
+        for proc in filtered_processes:
+            f.write(proc + '\n')
+
 def updateJSON(jsonfile, output, failed_list, update_eos):
     updater = JSONUpdater(jsonfile)
     os.system('xrdcp -sfr root://cmseos.fnal.gov//store/user/z374f439/XSectionJSONs/ ./')
     update_files = updater.get_json_files_from_directory('XSectionJSONs/')
     updater.update_with(update_files)
     updater.save(output)
+    update_failed_processes_file(failed_list, output)
     os.system(f'mv {output} {failed_list} XSectionJSONs/')
     os.system(f'rm {jsonfile}')
     if update_eos:
