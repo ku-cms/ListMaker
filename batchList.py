@@ -1,9 +1,6 @@
-import os
-import sys
-import subprocess
+import os, sys, subprocess, threading, json
 from optparse import OptionParser
 import concurrent.futures
-import threading
 
 # Parse options
 parser = OptionParser()
@@ -62,9 +59,21 @@ def get_dataset_paths(dataset, yeartag, query_type, version, last_version):
             yeartag = yeartag.replace(sc,'')
             special_campaign = sc
     if "Summer20UL" in yeartag: query = f'dasgoclient -query="dataset=/{dataset}/*{yeartag}NanoAOD{special_campaign}{version}*/{query_type}*"'
-    else:             query = f'dasgoclient -query="dataset=/{dataset}/*{yeartag}{special_campaign}NanoAOD{version}*/{query_type}*"'
+    else: query = f'dasgoclient -query="dataset=/{dataset}/*{yeartag}{special_campaign}NanoAOD{version}*/{query_type}*"'
     results = dataset, run_command(query).split("\n")
-    if results[1] == [''] and last_version: print(dataset,"in",yeartag+special_campaign,"not available from",query)
+    if results[1] == [''] and last_version:
+        if "Summer20UL" in yeartag: query = f'dasgoclient -query="dataset status=* dataset=/{dataset}/*{yeartag}NanoAOD{special_campaign}{version}*/{query_type}*"'
+        else: query = f'dasgoclient -query="dataset status=* dataset=/{dataset}/*{yeartag}{special_campaign}NanoAOD{version}*/{query_type}*"'
+        results = dataset, run_command(query).split("\n")
+        if results[1] == [''] and last_version:
+            print(dataset,"in",yeartag+special_campaign,"not available from",query,flush=True)
+        else:
+            if "Summer20UL" in yeartag: query = f'dasgoclient -json -query="dataset status=* dataset=/{dataset}/*{yeartag}NanoAOD{special_campaign}{version}*/{query_type}*"'
+            else: query = f'dasgoclient -json -query="dataset status=* dataset=/{dataset}/*{yeartag}{special_campaign}NanoAOD{version}*/{query_type}*"'
+            results = dataset, run_command(query)
+            data = json.loads(results[1])
+            status = data[0]['dataset'][0]['status']
+            print(dataset,"in",yeartag+special_campaign,"available with dataset status=",status,flush=True)
     return results
 
 def make_filelists(txt_filename, paths):
