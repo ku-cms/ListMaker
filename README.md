@@ -1,14 +1,15 @@
 This repo needs to be inside of a CMSSW directory and most scripts require a grid cert to run
 
-To make lists of files for bkg datasets run:
+To make lists of files for datasets run:
 
 nohup bash -c "time python3 batchList.py -i DataSetsList/bkg/" > batchList_bkg.debug 2>&1 &
+nohup bash -c "time python3 batchList.py -i DataSetsList/sms/" > batchList_sms.debug 2>&1 &
 
 To Make Filter Eff Files (run on LPC):
 
 Use batchlist to make lists of MINIAOD files for SMS samples
 
-nohup bash -c "time python3 batchList.py -i DataSetsList/sms/ --mini" > batchList_bkg.debug 2>&1 &
+nohup bash -c "time python3 batchList.py -i DataSetsList/sms/ --mini" > batchList_mini.debug 2>&1 &
 (ignore warnings)
 
 Then go to: GeneratorInterface/Core/test/ and then run:
