@@ -35,13 +35,13 @@ def get_tags(filename):
 def get_nanoaod_versions(cmssw, is_mini):
     """Determine the correct AOD versions based on the cmmsw release."""
     if is_mini:
-        return ["v4", "v3", "v2"]  # MiniAOD preferred order
+        return ["v6", "v5", "v4", "v3", "v2", ""]
     if "130X" in cmssw:
         return ["v12"]
     elif "106X" in cmssw:
         return ["v9"]
     elif "102X" in cmssw:
-        return ["v7", "v4"]  # Preferred order
+        return ["v7", "v4"]
     else:
         return [""]
 
@@ -58,18 +58,21 @@ def get_dataset_paths(dataset, yeartag, query_type, version, last_version):
         if sc in yeartag:
             yeartag = yeartag.replace(sc,'')
             special_campaign = sc
-    if "Summer20UL" in yeartag: query = f'dasgoclient -query="dataset=/{dataset}/*{yeartag}NanoAOD{special_campaign}{version}*/{query_type}*"'
-    else: query = f'dasgoclient -query="dataset=/{dataset}/*{yeartag}{special_campaign}NanoAOD{version}*/{query_type}*"'
+    AODType = "NanoAOD"
+    if is_mini:
+        AODType = "MiniAOD"
+    if "Summer20UL" in yeartag: query = f'dasgoclient -query="dataset=/{dataset}/*{yeartag}{AODType}{special_campaign}{version}*/{query_type}*"'
+    else: query = f'dasgoclient -query="dataset=/{dataset}/*{yeartag}{special_campaign}{AODType}{version}*/{query_type}*"'
     results = dataset, run_command(query).split("\n")
     if results[1] == [''] and last_version:
-        if "Summer20UL" in yeartag: query = f'dasgoclient -query="dataset status=* dataset=/{dataset}/*{yeartag}NanoAOD{special_campaign}{version}*/{query_type}*"'
-        else: query = f'dasgoclient -query="dataset status=* dataset=/{dataset}/*{yeartag}{special_campaign}NanoAOD{version}*/{query_type}*"'
+        if "Summer20UL" in yeartag: query = f'dasgoclient -query="dataset status=* dataset=/{dataset}/*{yeartag}{AODType}{special_campaign}{version}*/{query_type}*"'
+        else: query = f'dasgoclient -query="dataset status=* dataset=/{dataset}/*{yeartag}{special_campaign}{AODType}{version}*/{query_type}*"'
         results = dataset, run_command(query).split("\n")
         if results[1] == [''] and last_version:
             print(dataset,"in",yeartag+special_campaign,"not available from",query,flush=True)
         else:
-            if "Summer20UL" in yeartag: query = f'dasgoclient -json -query="dataset status=* dataset=/{dataset}/*{yeartag}NanoAOD{special_campaign}{version}*/{query_type}*"'
-            else: query = f'dasgoclient -json -query="dataset status=* dataset=/{dataset}/*{yeartag}{special_campaign}NanoAOD{version}*/{query_type}*"'
+            if "Summer20UL" in yeartag: query = f'dasgoclient -json -query="dataset status=* dataset=/{dataset}/*{yeartag}{AODType}{special_campaign}{version}*/{query_type}*"'
+            else: query = f'dasgoclient -json -query="dataset status=* dataset=/{dataset}/*{yeartag}{special_campaign}{AODType}{version}*/{query_type}*"'
             results_json = dataset, run_command(query)
             data = json.loads(results_json[1])
             status = data[0]['dataset'][0]['status']
