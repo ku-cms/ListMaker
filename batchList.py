@@ -117,16 +117,38 @@ def run_xrdfs(path):
     return lines
 
 def detect_tag_and_version_eos(path):
-    """First-match-wins heuristic for EOS path. Returns (tag_dir, cmssw_tag, nano_label)."""
+    """First-match-wins heuristic for EOS path. Returns (path, tag_dir, cmssw_tag, nano_label)."""
     p = path.upper()
-    if "130X" in p or "2022" in p:
-        return "Summer22_130X_SMS", "130X", "NanoAODv12"
-    if "106X" in p or ("UL" in p and "20" in p):
-        return "Summer20UL_106X_SMS", "106X", "NanoAODv9"
-    if "102X" in p:
-        return "Summer16_102X_SMS", "102X", "NanoAODv7"
-    if "UL18" in p or "18" in p:
-        return "UL18_106X_SMS", "106X", "NanoAODv9"
+
+    # Define patterns as tuples: (substring in path, tag_dir, cmssw_tag, nano_label)
+    patterns = [
+        ("102X", "16", "Summer16_102X_SMS", "102X", "NanoAODv7"),
+        ("102X", "17", "Fall17_102X_SMS", "102X", "NanoAODv7"),
+        ("102X", "18", "Autumn18_102X_SMS", "102X", "NanoAODv7"),
+
+        ("106X", "APV", "Summer20UL16APV_106X_SMS", "106X", "NanoAODv9"),
+        ("106X", "16", "Summer20UL16_106X_SMS", "106X", "NanoAODv9"),
+        ("106X", "17", "Summer20UL17_106X_SMS", "106X", "NanoAODv9"),
+        ("106X", "18", "Summer20UL18_106X_SMS", "106X", "NanoAODv9"),
+        ("UL", "APV", "Summer20UL16APV_106X_SMS", "106X", "NanoAODv9"),
+        ("UL", "16", "Summer20UL16_106X_SMS", "106X", "NanoAODv9"),
+        ("UL", "17", "Summer20UL17_106X_SMS", "106X", "NanoAODv9"),
+        ("UL", "18", "Summer20UL18_106X_SMS", "106X", "NanoAODv9"),
+
+        ("130X", "EE", "Summer22EE_130X_SMS", "130X", "NanoAODv12"),
+        ("130X", "BPIX", "Summer23BPix_130X_SMS", "130X", "NanoAODv12"),
+        ("130X", "22", "Summer22_130X_SMS", "130X", "NanoAODv12"),
+        ("130X", "23", "Summer23_130X_SMS", "130X", "NanoAODv12"),
+        ("130X", "24", "Summer24_130X_SMS", "130X", "NanoAODv12"),
+        ("130X", "25", "Summer25_130X_SMS", "130X", "NanoAODv12"),
+        ("130X", "26", "Summer26_130X_SMS", "130X", "NanoAODv12"),
+    ]
+
+    for main, sub, tag_dir, cmssw_tag, nano_label in patterns:
+        if main in p and sub in p:
+            return tag_dir, cmssw_tag, nano_label
+
+    print(f"Can't find matching labels for {p}")
     return "UnknownCampaign", "unknown", "NanoAODvX"
 
 def normalize_eos_xrootd_path(p):
@@ -155,7 +177,6 @@ def write_eos_filelist(outfile, root_files):
                 url = normalize_eos_xrootd_path(rf)
                 if url:
                     f.write(url + "\n")
-    print(f"[EOS] appended {len(root_files)} entries to {outfile}", flush=True)
 
 def walk_eos_and_write(eos_base, out_root, is_mini_flag, outpaths):
     """Walk EOS base dir, find *_MINI or *_NANO (per is_mini_flag), descend until .root files are found, write lists."""
@@ -196,7 +217,7 @@ def walk_eos_and_write(eos_base, out_root, is_mini_flag, outpaths):
             # entries are absolute EOS paths from xrdfs; collect .root files
             root_files = [e for e in entries if e.lower().endswith(".root")]
             if root_files:
-                tag_dir, cmssw_tag, nano_label = detect_tag_and_version_eos(current)
+                tag_dir, year, cmssw_tag, nano_label = detect_tag_and_version_eos(current)
                 out_tag_dir = tag_dir
                 outpath = os.path.join(out_root, AODType, out_tag_dir)
                 os.makedirs(outpath, exist_ok=True)
@@ -291,17 +312,16 @@ def main():
                 except Exception as e:
                     print(f"Error processing {futures[future]}: {e}", flush=True)
 
-    # Always run EOS scan (automatic). EOS base hardcoded to cascadeMC path:
-    eos_base = "/store/user/lpcsusylep/cascadeMC/"
-    print(f"[EOS] auto-scanning {eos_base} for {'_MINI' if is_mini else '_NANO'} samples ...", flush=True)
-    walk_eos_and_write(eos_base, output, is_mini, outpaths)
-
-    # Call addPath.py once per unique outpath (keeps existing behavior)
+    # Call addPath.py once per unique outpath
     for outpath in sorted(outpaths):
         try:
             subprocess.run(f'python3 addPath.py -p {outpath}', shell=True, check=True)
         except subprocess.CalledProcessError as e:
             print(f"[WARN] addPath.py failed for {outpath}: {e}", flush=True)
+
+    # Always run EOS scan (automatic). EOS base hardcoded to cascadeMC path:
+    #eos_base = "/store/user/lpcsusylep/cascadeMC/"
+    #walk_eos_and_write(eos_base, output, is_mini, outpaths)
 
     print("Processing complete.", flush=True)
 
