@@ -70,8 +70,8 @@ def get_dataset_paths(dataset, yeartag, query_type, version, last_version):
         else:
             if "Summer20UL" in yeartag: query = f'dasgoclient -json -query="dataset status=* dataset=/{dataset}/*{yeartag}NanoAOD{special_campaign}{version}*/{query_type}*"'
             else: query = f'dasgoclient -json -query="dataset status=* dataset=/{dataset}/*{yeartag}{special_campaign}NanoAOD{version}*/{query_type}*"'
-            results = dataset, run_command(query)
-            data = json.loads(results[1])
+            results_json = dataset, run_command(query)
+            data = json.loads(results_json[1])
             status = data[0]['dataset'][0]['status']
             print(dataset,"in",yeartag+special_campaign,"available with dataset status=",status,flush=True)
     return results
