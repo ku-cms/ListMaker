@@ -1,7 +1,6 @@
-import os
+import os, glob
 
-dir_list = ["Autumn18_102X_SMS/","Fall17_102X_SMS/","Summer16_102X_SMS/"]
-
+dir_list = [os.path.basename(d) + "/" for d in glob.glob(path_to_MINI + "*X_SMS/")]
 for directory in dir_list:
     for filename in os.listdir("condor_"+directory+"/txt/"):
         os.system("cat condor_"+directory+"/txt/"+filename+"/*.txt > condor_"+directory+"/txt/"+filename+".txt")

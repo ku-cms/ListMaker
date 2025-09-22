@@ -4,7 +4,7 @@ To make lists of files for bkg datasets run:
 
 nohup bash -c "time python3 batchList.py -i DataSetsList/bkg/" > batchList_bkg.debug 2>&1 &
 
-To Make Filter Eff Files:
+To Make Filter Eff Files (only run on LPC(?)):
 
 Use batchlist to make lists of MINIAOD files for SMS samples
 

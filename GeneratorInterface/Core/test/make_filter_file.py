@@ -1,20 +1,5 @@
-import os
-
-safety_jobs = 6000
-
-def get_jobs():
-    jobs = 0
-    os.system("source /uscms/home/z374f439/nobackup/UNL_T3_Home/Eff_NANO/ReducedNtuple/scripts/Plot_watch.sh > watch.txt")
-    os.system("sleep 5")
-    watch_file = open("watch.txt","r")
-    for line in watch_file:
-        watch_jobs = line.split(',')
-        for phrase in watch_jobs:
-            if 'query' in phrase:
-                words = phrase.split()
-                jobs += int(words[3])
-    return jobs
-    os.system("rm watch.txt")
+import os, glob
+from CondorJobCountMonitor import CondorJobCountMonitor
 
 def make_submit_sh(srcfile,year,dataset):
     fsrc = open(srcfile,'w')
@@ -38,12 +23,12 @@ def make_submit_sh(srcfile,year,dataset):
     fsrc.close()
 
 path_to_MINI = "../../../MINI/"
-dir_list = ["Summer16_102X_SMS/","Fall17_102X_SMS/","Autumn18_102X_SMS/"]
+dir_list = [os.path.basename(d) + "/" for d in glob.glob(path_to_MINI + "*X_SMS/")]
 for directory in dir_list:
-    #files = [path_to_MINI+directory+f for f in os.listdir(path_to_MINI+directory) if f.endswith(".txt")]
     files = [f for f in os.listdir(path_to_MINI+directory) if f.endswith(".txt")]
     os.system("ls "+path_to_MINI+directory+" > lists_"+directory.replace('/','')+".txt")
     os.system("rm -r condor_"+directory)
+    monitor = CondorJobCountMonitor(threshold=90000, verbose=False)
     for file in files:
         dataset = file.replace('.txt','')
         os.system("mkdir -p condor_"+directory+'src/'+dataset+'/')
@@ -54,10 +39,5 @@ for directory in dir_list:
         srcfile = "condor_"+directory+"src/"+dataset+".submit"
         make_submit_sh(srcfile,directory.replace('/',''),dataset)
         print("condor_submit "+srcfile)
-        NJOBS = get_jobs()
-        while NJOBS > safety_jobs:
-            print("Hit safety limit")
-            print("Waiting for "+str(NJOBS-safety_jobs)+" jobs to finish...")
-            os.system("sleep 60")
-            NJOBS = get_jobs()
+        monitor.wait_until_jobs_below()
         os.system("condor_submit "+srcfile)
