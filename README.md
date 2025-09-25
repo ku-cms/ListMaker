@@ -16,9 +16,15 @@ Then go to: GeneratorInterface/Core/test/ and then run:
 
 python3 make_filter_file.py
 
-Finally run:
+Check jobs with:
+python3 checkJobs.py
+
+Then run to convert into format expected by final macro:
 
 python3 convert_filter_file.py
+
+Final macro:
+SUSYCascades/macros/MakeFilterEff.C 
 
 For using XSDB Scraper: 
 
