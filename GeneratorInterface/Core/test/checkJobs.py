@@ -178,12 +178,19 @@ def make_resubmit_header_from_submit_content(submit_content: str, submit_name: s
     exec_line = extract_line_value(submit_content, "executable") or "execute_script.sh"
     transfer_input = extract_line_value(submit_content, "transfer_input_files") or ""
     req_mem = extract_line_value(submit_content, "request_memory") or "2 GB"
-
+    proc_type = ''
+    os_type = ''
+    if "130X" in submit_name:
+        proc_type = 'Run3\n'
+        os_type = '+DesiredOS="SL7"\n'
+    else:
+        proc_type = 'UL\n'
+        os_type = '+DesiredOS="EL9"\n'
     header = (
         "universe = vanilla\n"
         f"executable = {exec_line}\n"
         "use_x509userproxy = true\n"
-        'Arguments = $(Args) $(TxtFile)\n'
+        'Arguments = $(Args) $(TxtFile) {proc_type}\n'
     )
     if forced_dataset:
         header += f"Dataset = {forced_dataset}\n"
@@ -200,8 +207,8 @@ def make_resubmit_header_from_submit_content(submit_content: str, submit_name: s
         "when_to_transfer_output = ON_EXIT\n"
         "transfer_output_files = $(TxtFile)\n"
         f'transfer_output_remaps = "$(TxtFile)=$ENV(PWD)/{submit_name}/txt/$(Dataset)/$(TxtFile)"\n'
-        '+DesiredOS="SL7"\n\n'
     )
+    header += os_type + '\n'
     return header
 
 def write_resubmit_file(resubmit_path: str, submit_name: str, submit_content: str,

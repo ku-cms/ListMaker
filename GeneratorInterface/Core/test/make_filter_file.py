@@ -6,7 +6,11 @@ def make_submit_sh(srcfile,year,dataset):
     fsrc.write('universe = vanilla \n') 
     fsrc.write('executable = execute_script.sh \n')
     fsrc.write('use_x509userproxy = true \n')
-    fsrc.write('Arguments = $(Item) '+dataset+'_$(ProcId).txt \n')
+    fsrc.write('Arguments = $(Item) '+dataset+'_$(ProcId).txt ')
+    if "130X" in year:
+        fsrc.write('Run3\n')
+    else:
+        fsrc.write('UL\n')
     fsrc.write('output = $ENV(PWD)/condor_'+year+'/out/'+dataset+'/'+dataset+'_$(ProcId).out \n')
     fsrc.write('error = $ENV(PWD)/condor_'+year+'/err/'+dataset+'/'+dataset+'_$(ProcId).err \n')
     fsrc.write('log = $ENV(PWD)/condor_'+year+'/log/'+dataset+'/'+dataset+'_$(ProcId).log \n')
@@ -16,7 +20,10 @@ def make_submit_sh(srcfile,year,dataset):
     fsrc.write('when_to_transfer_output = ON_EXIT \n')
     fsrc.write('transfer_output_files = '+dataset+'_$(ProcId).txt \n')
     fsrc.write('transfer_output_remaps = "'+dataset+'_$(ProcId).txt=$ENV(PWD)/condor_'+year+'/txt/'+dataset+'/'+dataset+'_$(ProcId).txt" \n')
-    fsrc.write('+DesiredOS="SL7"\n')
+    if "130X" in year:
+        fsrc.write('+DesiredOS="EL9"\n')
+    else:
+        fsrc.write('+DesiredOS="SL7"\n')
     fsrc.write('queue $(Item) from '+path_to_MINI+year+'/'+dataset+'.txt \n')
     fsrc.close()
 
@@ -40,4 +47,3 @@ for directory in dir_list:
         monitor.wait_until_jobs_below()
         print("condor_submit "+srcfile)
         os.system("condor_submit "+srcfile)
-    break # debug

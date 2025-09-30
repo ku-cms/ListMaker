@@ -10,7 +10,6 @@ To Make Filter Eff Files (run on LPC):
 Use batchlist to make lists of MINIAOD files for SMS samples
 
 nohup bash -c "time python3 batchList.py -i DataSetsList/sms/ --mini" > batchList_mini.debug 2>&1 &
-(ignore warnings)
 
 Then go to: GeneratorInterface/Core/test/ and then run:
 
