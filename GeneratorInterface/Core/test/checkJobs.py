@@ -178,19 +178,21 @@ def make_resubmit_header_from_submit_content(submit_content: str, submit_name: s
     exec_line = extract_line_value(submit_content, "executable") or "execute_script.sh"
     transfer_input = extract_line_value(submit_content, "transfer_input_files") or ""
     req_mem = extract_line_value(submit_content, "request_memory") or "2 GB"
-    proc_type = ''
-    os_type = ''
+
+    # Decide proc_type and OS correctly: 130X -> Run3 -> EL9, else -> UL -> SL7
     if "130X" in submit_name:
-        proc_type = 'Run3\n'
-        os_type = '+DesiredOS="SL7"\n'
-    else:
-        proc_type = 'UL\n'
+        proc_type = "Run3"
         os_type = '+DesiredOS="EL9"\n'
+    else:
+        proc_type = "UL"
+        os_type = '+DesiredOS="SL7"\n'
+
+    # Use f-string so proc_type is actually substituted into the Arguments line.
     header = (
         "universe = vanilla\n"
         f"executable = {exec_line}\n"
         "use_x509userproxy = true\n"
-        'Arguments = $(Args) $(TxtFile) {proc_type}\n'
+        f"Arguments = $(Args) $(TxtFile) {proc_type}\n"
     )
     if forced_dataset:
         header += f"Dataset = {forced_dataset}\n"
@@ -218,6 +220,9 @@ def write_resubmit_file(resubmit_path: str, submit_name: str, submit_content: st
 
     header = make_resubmit_header_from_submit_content(submit_content, submit_name, forced_dataset)
 
+    # determine proc_type same way as make_submit_sh: "130X" -> Run3 else UL
+    proc_type_token = "Run3" if "130X" in submit_name else "UL"
+
     with open(resubmit_path, "w") as f:
         f.write("# AUTO-GENERATED resubmit file (standalone)\n")
         f.write("# Header (derived from original submit)\n")
@@ -230,7 +235,7 @@ def write_resubmit_file(resubmit_path: str, submit_name: str, submit_content: st
         for procid, item, args_str in failed_entries:
             safe_item = _sanitize_token(item)[:80] if item else "dataset"
 
-            # log token
+            # log token (prefer explicit name_N.txt in args_str)
             m = re.search(r'([^\s/\\"]+_\d+)\.txt\b', args_str)
             if m:
                 log_token = _sanitize_token(m.group(1))
@@ -243,20 +248,32 @@ def write_resubmit_file(resubmit_path: str, submit_name: str, submit_content: st
             except Exception:
                 tokens = args_str.strip().split()
 
-            # remove trailing txt token from args if present
-            if tokens and tokens[-1].endswith('.txt'):
-                txt_token_raw = tokens.pop(-1)
+            # Search for any token that ends with .txt (case-insensitive), remove it and use as txt_token
+            txt_token_raw = None
+            txt_index = None
+            for i, t in enumerate(tokens):
+                if t.lower().endswith('.txt'):
+                    txt_index = i
+                    break
+
+            if txt_index is not None:
+                txt_token_raw = tokens.pop(txt_index)
             else:
                 txt_token_raw = f"{safe_item}_{procid}.txt"
 
             txt_token = os.path.basename(txt_token_raw)
+
+            # Remove the proc_type token (UL or Run3) if it is present in tokens,
+            # so the final Arguments = $(Args) $(TxtFile) <ProcType> produces the correct ordering.
+            tokens = [t for t in tokens if t != proc_type_token and t.upper() != proc_type_token.upper()]
 
             if forced_dataset:
                 dataset_token = forced_dataset
             else:
                 dataset_token = _derive_dataset_token(item, args_str=args_str, txt_token=txt_token)
 
-            args_quoted = " ".join(shlex.quote(t) for t in tokens)
+            # Quote the entire Args field as a single token so condor sees it as one field.
+            args_quoted = shlex.quote(" ".join(tokens))
 
             if forced_dataset:
                 f.write(f"{log_token} {args_quoted} {txt_token}\n")
