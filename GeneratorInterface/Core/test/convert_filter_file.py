@@ -34,4 +34,6 @@ for directory in dir_list:
                     eff.append(eff_line.split()[0])
         for i in range(len(section)):
             f.write(block[i]+","+eff[i]+","+N_total[i]+","+N_passed[i]+","+N_failed[i]+'\n')
-        #print("cp condor_"+directory+"*.txt "+directory)
+    idir = directory.replace('/','')
+    os.system(f"ls {idir}/** > {idir}_list.txt")
+    os.system(f"root -l -b 'MakeFilterEff.C++(\"{idir}_list.txt\",\"{idir.replace('_SMS','')}\")'")
