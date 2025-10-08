@@ -34,6 +34,10 @@ ZJetsToNuNu_HT-2500ToInf_TuneCP5_13TeV-madgraphMLM-pythia8
 TTJets_TuneCP5_13TeV-amcatnloFXFX-pythia8
 tZq_ll_4f_ckm_NLO_TuneCP5_13TeV-amcatnlo-pythia8
 TTGJets_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8
+DYJetsToLL_M-4to50_HT-100to200_TuneCP5_13TeV-madgraphMLM-pythia8
+DYJetsToLL_M-4to50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8
+DYJetsToLL_M-4to50_HT-400to600_TuneCP5_13TeV-madgraphMLM-pythia8
+DYJetsToLL_M-4to50_HT-600toInf_TuneCP5_13TeV-madgraphMLM-pythia8
 QCD_HT100to200_TuneCP5_PSWeights_13TeV-madgraphMLM-pythia8
 ZZZ_TuneCP5_13TeV-amcatnlo-pythia8
 QCD_HT300to500_TuneCP5_PSWeights_13TeV-madgraphMLM-pythia8
