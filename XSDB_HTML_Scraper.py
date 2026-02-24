@@ -77,7 +77,7 @@ def get_XSDB_Info(dataset_name="", search_field=None, driver=None, repeat=0, max
     search_field.send_keys(Keys.RETURN)
     
     # Wait for page to load after searching for dataset
-    time.sleep(0.25+repeat/max(1,max_repeat))
+    time.sleep(0.5+repeat/max(1,max_repeat))
     
     # Scrape the page for info
     page_source = driver.page_source
