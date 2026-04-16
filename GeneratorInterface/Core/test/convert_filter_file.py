@@ -36,4 +36,5 @@ for directory in dir_list:
             f.write(block[i]+","+eff[i]+","+N_total[i]+","+N_passed[i]+","+N_failed[i]+'\n')
     idir = directory.replace('/','')
     os.system(f"ls {idir}/** > {idir}_list.txt")
+    print(f"running: root -l -b 'MakeFilterEff.C++(\"{idir}_list.txt\",\"{idir.replace('_SMS','')}\")'")
     os.system(f"root -l -b 'MakeFilterEff.C++(\"{idir}_list.txt\",\"{idir.replace('_SMS','')}\")'")

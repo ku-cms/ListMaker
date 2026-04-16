@@ -13,3 +13,4 @@ info_XSDB_*.json
 history*
 __pycache__
 XSectionJSONs
+*_C*
