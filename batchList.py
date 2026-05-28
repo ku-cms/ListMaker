@@ -46,8 +46,7 @@ def get_nanoaod_versions(cmssw, is_mini_flag):
     if is_mini_flag:
         return ["v6", "v5", "v4", "v3", "v2", ""]
     if "130X" in cmssw:
-        #return ["v12"]
-        return ["v15", "v12"]
+        return ["v12", "v15"]
     elif "106X" in cmssw:
         return ["v9"]
     elif "102X" in cmssw:
@@ -427,7 +426,8 @@ def main():
 
     skip_files = []
     if directory and not is_sms:
-       skip_files = ["102X"]
+       #skip_files = ["102X"]
+       skip_files = []
 
     all_files = []
     if directory:
