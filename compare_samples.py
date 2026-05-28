@@ -64,10 +64,7 @@ def main():
         except Exception as e:
             print(f"ERROR reading {relpath}: {e}")
 
-    print()
     print("Done.")
-
 
 if __name__ == "__main__":
     main()
-
