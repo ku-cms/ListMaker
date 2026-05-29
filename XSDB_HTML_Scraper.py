@@ -34,7 +34,7 @@ def get_chrome_options():
 def CERN_login(driver):
     # Locate the username, password fields and the login button
     try:
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.NAME, 'login')))
+        WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.NAME, 'login')))
     except TimeoutException:
         print("Login page failed to load!")
         return None
@@ -45,13 +45,21 @@ def CERN_login(driver):
     # Enter the credentials and click the login button
     username = getpass("Please enter your CERN username and press Enter to continue...")
     password = getpass("Please enter your CERN password and press Enter to continue...")
-    username_field.send_keys(username)
-    password_field.send_keys(password)
+    driver.execute_script(
+        "arguments[0].value = arguments[1];",
+        username_field,
+        username
+    )
+    driver.execute_script(
+        "arguments[0].value = arguments[1];",
+        password_field,
+        password
+    )
     login_button.click()
     
     # Wait for the 2FA input page to load
     try:
-        two_fa_input = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "kc-otp-login-form")))
+        two_fa_input = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "kc-otp-login-form")))
     except TimeoutException:
         print("Login failed!")
         return None
