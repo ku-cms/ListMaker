@@ -74,16 +74,50 @@ def CERN_login(driver):
     sign_in_button = driver.find_element(By.ID, "kc-login")
     sign_in_button.click()
 
+def is_float(value):
+    try:
+        float(value)
+        return True
+    except (ValueError, TypeError):
+        return False
+
+def set_search_field(driver, search_field, search_string):
+    search_field.clear()
+    time.sleep(0.1)
+
+    driver.execute_script(
+        "arguments[0].value = arguments[1];",
+        search_field,
+        search_string
+    )
+
+    for event in ['input', 'change', 'keyup']:
+        driver.execute_script(
+            "arguments[0].dispatchEvent(new Event(arguments[1], { bubbles: true }));",
+            search_field,
+            event
+        )
+
+    search_field.send_keys(Keys.SPACE)
+    search_field.send_keys(Keys.BACKSPACE)
+
+    # Debug: see what the field actually contains
+    actual = driver.execute_script("return arguments[0].value;", search_field)
+    time.sleep(0.2)
 
 def get_XSDB_Info(dataset_name="", search_field=None, driver=None, repeat=0, max_repeat=3):
     if max_repeat < 0: max_repeat = 0
     # Type dataset_name into search_field
     dataset_name = dataset_name.replace('\n', '').replace('\r', '').strip()
     search_string = "process_name="+dataset_name
-    search_field.clear()
-    search_field.send_keys(search_string)
-    search_field.send_keys(Keys.RETURN)
-    
+    set_search_field(driver, search_field, search_string)    
+    search_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, "//button[@type='submit' and normalize-space()='Search']")
+        )
+    )
+    search_button.click()
+
     # Wait for page to load after searching for dataset
     time.sleep(0.5+repeat/max(1,max_repeat))
     
@@ -98,10 +132,10 @@ def get_XSDB_Info(dataset_name="", search_field=None, driver=None, repeat=0, max
         if dataset_name in str(tbody.text):
             selected_tbody = tbody
             break
-    
+
     dataset_info = []
     if selected_tbody:
-        rows = [row for row in selected_tbody.find_all("tr", recursive=False)]  # Avoid nested elements
+        rows = [row for row in selected_tbody.find_all("tr", recursive=False)]
         for row in rows:
             cells = row.find_all('td')
             if len(cells) >= 19:
@@ -116,14 +150,30 @@ def get_XSDB_Info(dataset_name="", search_field=None, driver=None, repeat=0, max
                     'kFactor': cells[14].get_text(strip=True),
                     'energy': cells[17].get_text(strip=True)
                 })
-    elif repeat < max_repeat and dataset_info and dataset_info[0]['process_name'] != dataset_name:
-        # Repeat in case website was too slow to load
-        repeat += 1
-        get_XSDB_Info(dataset_name, search_field, driver, repeat)
-    else:
+    
+    # Retry if nothing valid was found
+    if (
+        repeat < max_repeat
+        and (
+            not dataset_info
+            or dataset_info[0]['process_name'] != dataset_name
+            or not is_float(dataset_info[0]['cross_section'])
+            or not is_float(dataset_info[0]['total_uncertainty'])
+        )
+    ):
+        return get_XSDB_Info(
+            dataset_name,
+            search_field,
+            driver,
+            repeat + 1,
+            max_repeat
+        )
+    
+    if not dataset_info:
         with open(f"failed_XSDB_datasets_{current_time}.txt", 'a') as f:
             f.write(f"{dataset_name}\n")
-    return dataset_info
+    
+    return dataset_info    
 
 def user_setup():
     # Get Chrome Options
@@ -182,6 +232,9 @@ def updateJSON(jsonfile, output, failed_list, update_eos):
     updater.update_with(update_files)
     updater.save(output)
     update_failed_processes_file(failed_list, output)
+    print("Failed to find xsections for:")
+    os.system(f'cat {failed_list}')
+    print("")
     os.system(f'mv {output} {failed_list} XSectionJSONs/')
     os.system(f'rm {jsonfile}')
     if update_eos:
