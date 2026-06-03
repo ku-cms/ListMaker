@@ -134,22 +134,32 @@ def get_XSDB_Info(dataset_name="", search_field=None, driver=None, repeat=0, max
             break
 
     dataset_info = []
+
+    XSDB_COLUMNS = [
+        'process_name', 'cross_section', 'total_uncertainty', 'other_uncertainty',
+        'accuracy', 'DAS', 'energy', 'createdBy', 'status', 'MCM',
+        'equivalent_lumi', 'fraction_negative_weight', 'reweighting', 'kFactor',
+        'shower', 'matrix_generator', 'isValid', 'comments', 'refs',
+        'discussion', 'modifiedOn', 'createdOn', 'modifiedBy', 'approvedBy',
+        'contact', 'cuts'
+    ]
+    
+    WANTED = {'process_name', 'cross_section', 'total_uncertainty',
+              'other_uncertainty', 'accuracy', 'DAS', 'MCM', 'kFactor', 'energy'}
+    
     if selected_tbody:
-        rows = [row for row in selected_tbody.find_all("tr", recursive=False)]
+        rows = selected_tbody.find_all("tr", recursive=False)
         for row in rows:
             cells = row.find_all('td')
-            if len(cells) >= 19:
-                dataset_info.append({
-                    'process_name': cells[0].get_text(strip=True),
-                    'cross_section': cells[3].get_text(strip=True),
-                    'total_uncertainty': cells[4].get_text(strip=True),
-                    'other_uncertainty': cells[5].get_text(strip=True),
-                    'accuracy': cells[6].get_text(strip=True),
-                    'DAS': cells[8].get_text(strip=True),
-                    'MCM': cells[9].get_text(strip=True),
-                    'kFactor': cells[14].get_text(strip=True),
-                    'energy': cells[17].get_text(strip=True)
-                })
+            if len(cells) < len(XSDB_COLUMNS):
+                continue
+            row_dict = {
+                col: cells[i].get_text(strip=True)
+                for i, col in enumerate(XSDB_COLUMNS)
+                if col in WANTED
+            }
+            if row_dict:
+                dataset_info.append(row_dict)
     
     # Retry if nothing valid was found
     if (
